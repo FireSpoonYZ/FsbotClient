@@ -7,19 +7,16 @@ import kotlin.reflect.KProperty
 abstract class BaseArgument<T> : ReadOnlyProperty<Any?, T> {
     var nullable = false
     var value: T? = null
-    var default: T? = null
-
-    override fun getValue(thisRef: Any?, property: KProperty<*>): T {
-        val res = if (nullable) {
-            if (value != null) {
-                value
+        get() = if (nullable) {
+            if (field != null) {
+                field
             } else {
                 default
             }
         } else {
             when {
-                value != null -> {
-                    value
+                field != null -> {
+                    field
                 }
                 default != null -> {
                     default
@@ -29,18 +26,21 @@ abstract class BaseArgument<T> : ReadOnlyProperty<Any?, T> {
                 }
             }
         }
-        return res as T
+    var default: T? = null
+
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T {
+        return value as T
     }
 
     abstract fun fromString(str: String): T?
 }
 
-fun <TT, T: BaseArgument<TT>> T.nullable() : T {
+fun <TT, T : BaseArgument<TT>> T.nullable(): T {
     this.nullable = true
     return this
 }
 
-fun <TT, T: BaseArgument<TT>> T.default(value: TT) : T {
+fun <TT, T : BaseArgument<TT>> T.default(value: TT): T {
     this.default = value
     return this
 }

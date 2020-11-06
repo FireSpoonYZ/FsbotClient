@@ -2,13 +2,13 @@ package org.firespoon.fsbotclient.service
 
 import org.firespoon.fsbotclient.model.FsResult
 
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestMethod
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestClient
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestParam
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestPath
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestClient
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestParam
 import org.firespoon.fsbotclient.model.DiceResult
 
-@FsRequestClient("http://localhost:80/dice")
+@RequestClient("http://localhost:80/dice")
 interface DiceService {
-    @FsRequestMethod("dice")
-    fun dice(@FsRequestParam("dice_exp") diceExp: String): FsResult<DiceResult>
+    @RequestPath("dice")
+    fun dice(@RequestParam("dice_exp") diceExp: String): FsResult<DiceResult>
 }

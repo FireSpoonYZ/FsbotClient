@@ -2,52 +2,52 @@ package org.firespoon.fsbotclient.service
 
 import org.firespoon.fsbotclient.model.CheckResult
 import org.firespoon.fsbotclient.model.FsResult
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestClient
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestMethod
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestParam
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestClient
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestPath
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestParam
 
-@FsRequestClient("http://localhost/coc")
+@RequestClient("http://localhost/coc")
 interface CocService {
-    @FsRequestMethod("init")
+    @RequestPath("init")
     fun init(
-        @FsRequestParam("place_id") placeId: Long,
-        @FsRequestParam("owner_id") ownerId: Long
+        @RequestParam("place_id") placeId: Long,
+        @RequestParam("owner_id") ownerId: Long
     ): FsResult<Int>
 
-    @FsRequestMethod("load_card")
+    @RequestPath("load_card")
     fun loadCard(
-        @FsRequestParam("place_id") placeId: Long,
-        @FsRequestParam("owner_id") ownerId: Long,
-        @FsRequestParam("name") name: String
+        @RequestParam("place_id") placeId: Long,
+        @RequestParam("owner_id") ownerId: Long,
+        @RequestParam("name") name: String
     ): FsResult<Int>
 
-    @FsRequestMethod("save_card")
+    @RequestPath("save_card")
     fun saveCard(
-        @FsRequestParam("place_id") placeId: Long,
-        @FsRequestParam("owner_id") ownerId: Long,
-        @FsRequestParam("name") name: String
+        @RequestParam("place_id") placeId: Long,
+        @RequestParam("owner_id") ownerId: Long,
+        @RequestParam("name") name: String
     ): FsResult<Int>
 
-    @FsRequestMethod("get_property")
+    @RequestPath("get_property")
     fun getProperty(
-        @FsRequestParam("place_id") placeId: Long,
-        @FsRequestParam("owner_id") ownerId: Long,
-        @FsRequestParam("name") name: String
+        @RequestParam("place_id") placeId: Long,
+        @RequestParam("owner_id") ownerId: Long,
+        @RequestParam("name") name: String
     ): FsResult<Int>
 
-    @FsRequestMethod("set_property")
+    @RequestPath("set_property")
     fun setProperty(
-        @FsRequestParam("place_id") placeId: Long,
-        @FsRequestParam("owner_id") ownerId: Long,
-        @FsRequestParam("name") name: String,
-        @FsRequestParam("value") value: Int?
+        @RequestParam("place_id") placeId: Long,
+        @RequestParam("owner_id") ownerId: Long,
+        @RequestParam("name") name: String,
+        @RequestParam("value") value: Int?
     ): FsResult<Int>
 
-    @FsRequestMethod("check")
+    @RequestPath("check")
     fun check(
-        @FsRequestParam("place_id") placeId: Long,
-        @FsRequestParam("owner_id") ownerId: Long,
-        @FsRequestParam("name") name: String,
-        @FsRequestParam("value") value: Int?
+        @RequestParam("place_id") placeId: Long,
+        @RequestParam("owner_id") ownerId: Long,
+        @RequestParam("name") name: String,
+        @RequestParam("value") value: Int?
     ): FsResult<CheckResult>
 }

@@ -2,14 +2,14 @@ package org.firespoon.fsbotclient.service
 
 import org.firespoon.fsbotclient.model.FsResult
 import org.firespoon.fsbotclient.model.Stand
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestClient
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestMethod
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestParam
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestClient
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestPath
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestParam
 
-@FsRequestClient("http://localhost/jojo/stand/")
+@RequestClient("http://localhost/jojo/stand/")
 interface StandService {
-    @FsRequestMethod("random")
+    @RequestPath("random")
     fun random(
-        @FsRequestParam("time") time: Int?
+        @RequestParam("time") time: Int?
     ): FsResult<List<Stand>>
 }

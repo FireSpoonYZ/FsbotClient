@@ -27,7 +27,7 @@ class SimpleCommand<C : BaseCli, D>(
         require(event != null) {
             "Event is null."
         }
-        var msg = "请求失败"
+        var msg : String? = null
         env.apply {
             val res = this.getResult()
             if (res != null) {
@@ -37,18 +37,20 @@ class SimpleCommand<C : BaseCli, D>(
                         msg = this.getMessage(data)
                     }
                 } else {
-                    res.message!!
+                    msg = res.message!!
                 }
             }
         }
 
-        val mb = MessageChainBuilder()
-        if (event is GroupMessageEvent) {
-            val sender = (event as GroupMessageEvent).sender
-            val at = At(sender)
-            mb.add(at)
+        if (msg != null) {
+            val mb = MessageChainBuilder()
+            if (event is GroupMessageEvent) {
+                val sender = (event as GroupMessageEvent).sender
+                val at = At(sender)
+                mb.add(at)
+            }
+            mb.add(msg!!)
+            event!!.reply(mb.build())
         }
-        mb.add(msg)
-        event!!.reply(mb.build())
     }
 }

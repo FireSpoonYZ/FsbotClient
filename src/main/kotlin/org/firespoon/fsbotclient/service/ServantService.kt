@@ -2,34 +2,34 @@ package org.firespoon.fsbotclient.service
 
 import org.firespoon.fsbotclient.model.FsResult
 import org.firespoon.fsbotclient.model.Servant
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestClient
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestMethod
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestParam
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestClient
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestPath
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestParam
 
-@FsRequestClient("http://localhost/fate/servant")
+@RequestClient("http://localhost/fate/servant")
 interface ServantService {
-    @FsRequestMethod("random")
+    @RequestPath("random")
     fun random(
-        @FsRequestParam("time") time: Int?,
-        @FsRequestParam("class") clazz: String?,
-        @FsRequestParam("user_id") userId: Long?,
-        @FsRequestParam("command") command: String?
+        @RequestParam("time") time: Int?,
+        @RequestParam("class") clazz: String?,
+        @RequestParam("user_id") userId: Long?,
+        @RequestParam("command") command: String?
     ): FsResult<List<Servant>>
 
-    @FsRequestMethod(path = "delete", method = "DELETE")
+    @RequestPath(path = "delete", method = "DELETE")
     fun delete(
-        @FsRequestParam("name") name: String,
-        @FsRequestParam("clazz") clazz: String
+        @RequestParam("name") name: String,
+        @RequestParam("clazz") clazz: String
     ): FsResult<Int>
 
-    @FsRequestMethod(path = "save", method = "POST")
+    @RequestPath(path = "save", method = "POST")
     fun save(
-        @FsRequestParam("name") name: String,
-        @FsRequestParam("clazz") clazz: String
+        @RequestParam("name") name: String,
+        @RequestParam("clazz") clazz: String
     ): FsResult<Int>
 
-    @FsRequestMethod("hassan")
+    @RequestPath("hassan")
     fun randomHassan(
-        @FsRequestParam("time") time: Int?
+        @RequestParam("time") time: Int?
     ): FsResult<List<Servant>>
 }

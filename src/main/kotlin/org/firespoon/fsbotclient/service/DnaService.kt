@@ -2,11 +2,11 @@ package org.firespoon.fsbotclient.service
 
 import org.firespoon.fsbotclient.model.Dna
 import org.firespoon.fsbotclient.model.FsResult
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestClient
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestMethod
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestClient
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestPath
 
-@FsRequestClient("http://localhost/dna")
+@RequestClient("http://localhost/dna")
 interface DnaService {
-    @FsRequestMethod("random")
+    @RequestPath("random")
     fun random() : FsResult<List<Dna>>
 }

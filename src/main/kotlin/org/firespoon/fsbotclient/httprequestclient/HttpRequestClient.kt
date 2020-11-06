@@ -1,29 +1,27 @@
-package org.firespoon.fsbotclient.fshttprequestclient
+package org.firespoon.fsbotclient.httprequestclient
 
 import com.google.gson.reflect.TypeToken
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.internal.http.HttpMethod
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestBody
 import org.firespoon.fsbotclient.model.FsResult
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestMethod
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestBody
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestClient
-import org.firespoon.fsbotclient.fshttprequestclient.annotation.FsRequestParam
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestPath
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestClient
+import org.firespoon.fsbotclient.httprequestclient.annotation.RequestParam
 import org.firespoon.fsbotclient.utils.JsonUtils
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import kotlin.reflect.KClass
 
-class FsHttpRequestClient<T : Any>(private val kClazz: KClass<T>) {
-
+class HttpRequestClient<T : Any>(private val kClazz: KClass<T>) {
     fun <T> build(): T {
         val clazz = kClazz.java
-        val fsRequestClient = clazz.getDeclaredAnnotation(FsRequestClient::class.java)
+        val fsRequestClient = clazz.getDeclaredAnnotation(RequestClient::class.java)
         require(fsRequestClient != null) {
             "目标不是FsRequestClient"
         }
@@ -45,7 +43,7 @@ class FsHttpRequestClient<T : Any>(private val kClazz: KClass<T>) {
                     if (callingMethod.name != method.name || !callingMethod.parameterTypes.contentEquals(method.parameterTypes)) {
                         continue
                     }
-                    val fsRequest = method.getDeclaredAnnotation(FsRequestMethod::class.java)
+                    val fsRequest = method.getDeclaredAnnotation(RequestPath::class.java)
                     if (fsRequest != null) {
                         var path = fsRequest.path
                         if (path.startsWith("/")) {
@@ -53,18 +51,18 @@ class FsHttpRequestClient<T : Any>(private val kClazz: KClass<T>) {
                         }
                         urlBuilder.addPathSegments(path)
                         val parameters = method.parameters
-                        var requestBody: RequestBody? = null
+                        var requestBody: okhttp3.RequestBody? = null
                         if (args != null) {
                             for (i in args.indices) {
                                 val arg = args[i] ?: continue
                                 val parameter = parameters[i]
-                                val fsRequestParam = parameter.getAnnotation(FsRequestParam::class.java)
+                                val fsRequestParam = parameter.getAnnotation(RequestParam::class.java)
                                 if (fsRequestParam != null) {
                                     urlBuilder.addQueryParameter(
                                         fsRequestParam.value, arg.toString()
                                     )
                                 } else {
-                                    val fsRequestBody = parameter.getAnnotation(FsRequestBody::class.java)
+                                    val fsRequestBody = parameter.getAnnotation(RequestBody::class.java)
                                     if (fsRequestBody != null) {
                                         val json = JsonUtils.toJson(parameter)
                                         val mediaType = "application/json".toMediaType()
