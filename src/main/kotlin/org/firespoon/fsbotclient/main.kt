@@ -4,10 +4,7 @@ import net.mamoe.mirai.Bot
 import net.mamoe.mirai.alsoLogin
 import net.mamoe.mirai.join
 import org.firespoon.fsbotclient.command.register
-import org.firespoon.fsbotclient.function.CocFunction
-import org.firespoon.fsbotclient.function.DnaFunction
-import org.firespoon.fsbotclient.function.FateFunction
-import org.firespoon.fsbotclient.function.JojoFunction
+import org.firespoon.fsbotclient.function.*
 
 suspend fun main() {
     val qqId = 744821060L
@@ -36,6 +33,8 @@ suspend fun main() {
 
     bot.register(JojoFunction.jojoCommand)
     bot.register(JojoFunction.randomStandCommand)
+
+    bot.register(ArkNightsFunction.calcCommand)
 
     bot.alsoLogin()
     bot.join()

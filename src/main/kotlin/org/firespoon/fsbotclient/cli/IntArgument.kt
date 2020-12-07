@@ -1,6 +1,5 @@
 package org.firespoon.fsbotclient.cli
 
-
 class IntArgument : BaseArgument<Int>() {
     override fun fromString(str: String): Int? {
         return str.toIntOrNull()
