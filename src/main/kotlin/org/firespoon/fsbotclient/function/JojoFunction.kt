@@ -21,13 +21,10 @@ abstract class JojoFunction {
             envClazz = JojoJojoEnv::class,
             getResult = { jojoService.jojo(time) },
             getMessage = { jojoResultList ->
-                val sb = StringBuilder("您的替身面板为：")
-                val jojoResultListMsg = jojoResultList.joinToString(
-                    separator = "\n",
-                    prefix = "\n"
+                jojoResultList.joinToString(
+                    prefix = "您的替身面板为：\n",
+                    separator = "\n"
                 )
-                sb.append(jojoResultListMsg)
-                sb.toString()
             }
         )
 
@@ -39,13 +36,10 @@ abstract class JojoFunction {
             envClazz = JojoRandomStandEnv::class,
             getResult = { standService.random(time) },
             getMessage = { standList ->
-                val sb = StringBuilder("您的替身为：")
-                val standListMsg = standList.joinToString(
+                standList.joinToString(
                     separator = "\n\n",
-                    prefix = "\n"
+                    prefix = "您的替身为\n"
                 )
-                sb.append(standListMsg)
-                sb.toString()
             }
         )
     }

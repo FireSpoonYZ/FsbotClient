@@ -14,14 +14,11 @@ abstract class DnaFunction {
             envClazz = EmptyCli::class,
             getResult = { dnaService.random() },
             getMessage = { dnaList ->
-                val sb = StringBuilder("您的随机dna结果为：")
                 val sortedDnaList = dnaList.sortedBy { it.rank }
-                val dnaMsg = sortedDnaList.joinToString(
-                    prefix = "\n",
+                sortedDnaList.joinToString(
+                    prefix = "您的随机dna结果为：\n",
                     separator = "\n"
                 )
-                sb.append(dnaMsg)
-                sb.toString()
             }
         )
     }

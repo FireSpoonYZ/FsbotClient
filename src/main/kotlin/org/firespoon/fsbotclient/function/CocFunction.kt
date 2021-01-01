@@ -7,7 +7,6 @@ import org.firespoon.fsbotclient.service.CocService
 import org.firespoon.fsbotclient.service.DiceService
 import org.firespoon.fsbotclient.command.SimpleCommand
 import org.firespoon.fsbotclient.utils.NetworkUtils
-import java.lang.StringBuilder
 
 abstract class CocFunction {
     companion object {
@@ -27,8 +26,8 @@ abstract class CocFunction {
                     var res: String
                     data[i].apply {
                         val total = STR!! + CON!! + SIZ!! + DEX!! + APP!! + POW!! + EDU!!
-                        res =
-                            "力量:$STR 体质:$CON 体型:$SIZ 敏捷:$DEX 外貌:$APP 智力:$INT 意志:$POW 教育:$EDU 幸运:$LUK 总计:$total/${total + LUK!!}"
+                        val totalWithLUK = total + LUK!!
+                        res = "力量:$STR 体质:$CON 体型:$SIZ 敏捷:$DEX 外貌:$APP 智力:$INT 意志:$POW 教育:$EDU 幸运:$LUK 总计:$total/$totalWithLUK"
                     }
                     res
                 }.joinToString(prefix = "您的coc人物做成结果为:\n", separator = "\n")
@@ -197,13 +196,10 @@ abstract class CocFunction {
             envClazz = CocAllCardEnv::class,
             getResult = { cardService.getAll(ownerId) },
             getMessage = { cardList ->
-                val sb = StringBuilder("您的角色卡为:")
-                val cardListStr = cardList.joinToString(
-                    separator = "\n",
-                    prefix = "\n"
+                cardList.joinToString(
+                    prefix = "您的角色卡为:\n",
+                    separator = "\n"
                 ) { it.name!! }
-                sb.append(cardListStr)
-                sb.toString()
             },
             prefixArgs = { event: MessageEvent ->
                 val res = mutableListOf<String>()

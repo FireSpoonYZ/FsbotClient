@@ -11,9 +11,7 @@ import kotlin.reflect.KClass
 
 class SimpleCommand<C : BaseCli, D>(
     keywords: List<String>,
-    //envTemplate: C,
     envClazz : KClass<C>,
-    //factory: () -> C,
     val getResult: C.() -> FsResult<D>?,
     val getMessage: C.(D) -> String,
     prefixArgs: ArgParser<MessageEvent> = { emptyList() },
