@@ -11,12 +11,6 @@ import org.firespoon.fsbotclient.model.Servant
 class FateRandomHassanCommand : FsCommand<List<Servant>, MessageEvent>() {
     val time : Int? by int().nullable()
 
-    override fun prefixArgs(event: MessageEvent): List<String> {
-        val res = mutableListOf<String>()
-        res.add(event.sender.id.toString())
-        return res
-    }
-
     override fun result(): FsResult<List<Servant>> {
         return FateFunction.servantService.randomHassan(time)
     }
