@@ -6,7 +6,7 @@ abstract class BaseCli {
 
     abstract fun run()
 
-    fun call(args: List<String>) {
+    fun parse(args: List<String>) {
         var index = 0
         for (_arg in arguments) {
             val arg = _arg as BaseArgument<Any?>
@@ -32,6 +32,10 @@ abstract class BaseCli {
                 "参数错误"
             }
         }
+    }
+
+    fun call(args: List<String>) {
+        parse(args)
         run()
     }
 }

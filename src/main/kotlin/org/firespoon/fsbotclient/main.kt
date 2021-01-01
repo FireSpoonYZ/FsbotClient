@@ -4,39 +4,43 @@ import net.mamoe.mirai.Bot
 import net.mamoe.mirai.alsoLogin
 import net.mamoe.mirai.join
 import org.firespoon.fsbotclient.command.register
-import org.firespoon.fsbotclient.function.*
+import org.firespoon.fsbotclient.function.coc.*
+import org.firespoon.fsbotclient.function.fate.*
+import org.firespoon.fsbotclient.function.dna.*
+import org.firespoon.fsbotclient.function.jojo.*
+import org.firespoon.fsbotclient.function.arknights.*
 
 suspend fun main() {
     val qqId = 744821060L
     val password = "1!2@3#skyYZ"
 
-    val bot = Bot(qqId, password) {
+    Bot(qqId, password) {
         fileBasedDeviceInfo()
+    }.also {
+        it.register(CocCocCommand::class)
+        it.register(CocDiceCommand::class)
+        it.register(CocSetCommand::class)
+        it.register(CocCheckCommand::class)
+        it.register(CocSaveCardCommand::class)
+        it.register(CocLoadCardCommand::class)
+        it.register(CocClearCardCommand::class)
+        it.register(CocDeleteCardCommand::class)
+        it.register(CocAllCardCommand::class)
+
+        it.register(DnaDnaCommand::class)
+
+        it.register(FateFateCommand::class)
+        it.register(FateRandomServantCommand::class)
+        it.register(FateAddServantCommand::class)
+        it.register(FateDeleteServantCommand::class)
+        it.register(FateRandomHassanCommand::class)
+
+        it.register(JojoJojoCommand::class)
+        it.register(JojoRandomStandCommand::class)
+
+        it.register(ArkNightsCalcCommand::class)
+
+        it.alsoLogin()
+        it.join()
     }
-
-    bot.register(CocFunction.cocCommand)
-    bot.register(CocFunction.diceCommand)
-    bot.register(CocFunction.setCommand)
-    bot.register(CocFunction.checkCommand)
-    bot.register(CocFunction.saveCardCommand)
-    bot.register(CocFunction.loadCardCommand)
-    bot.register(CocFunction.clearCardCommand)
-    bot.register(CocFunction.deleteCardCommand)
-    bot.register(CocFunction.allCardCommand)
-
-    bot.register(DnaFunction.randomDnaCommand)
-
-    bot.register(FateFunction.fateCommand)
-    bot.register(FateFunction.randomServantCommand)
-    bot.register(FateFunction.addServantCommand)
-    bot.register(FateFunction.deleteServantCommand)
-    bot.register(FateFunction.randomHassanCommand)
-
-    bot.register(JojoFunction.jojoCommand)
-    bot.register(JojoFunction.randomStandCommand)
-
-    bot.register(ArkNightsFunction.calcCommand)
-
-    bot.alsoLogin()
-    bot.join()
 }
