@@ -19,10 +19,10 @@ abstract class FateFunction {
             envClazz = FateFateEnv::class,
             getResult = { fateService.fate(time) },
             getMessage = { fateResultList ->
-                val sb = StringBuilder("您的fate人物做成结果为：\n")
-                val fateResultMsg = fateResultList.joinToString(separator = "\n")
-                sb.append(fateResultMsg)
-                sb.toString()
+                fateResultList.joinToString(
+                    prefix = "您的fate人物做成结果为：\n",
+                    separator = "\n"
+                )
             }
         )
 
@@ -37,13 +37,10 @@ abstract class FateFunction {
             envClazz = FateRandomServantEnv::class,
             getResult = { servantService.random(time, clazz, userId, command) },
             getMessage = { servantList ->
-                val sb = java.lang.StringBuilder("您的从者为：")
-                val servantListMsg = servantList.joinToString(
-                    separator = "\n",
-                    prefix = "\n"
+                servantList.joinToString(
+                    prefix = "您的从者为：\n",
+                    separator = "\n"
                 )
-                sb.append(servantListMsg)
-                sb.toString()
             },
             prefixArgs = { event ->
                 val res = mutableListOf<String>()
@@ -94,13 +91,10 @@ abstract class FateFunction {
             envClazz = FateRandomHassanEnv::class,
             getResult = { servantService.randomHassan(time) },
             getMessage = { servantList ->
-                val sb = java.lang.StringBuilder("您的从者为：")
-                val servantListMsg = servantList.joinToString(
-                    separator = "\n",
-                    prefix = "\n"
+                servantList.joinToString(
+                    prefix = "您的从者为：\n",
+                    separator = "\n"
                 )
-                sb.append(servantListMsg)
-                sb.toString()
             }
         )
     }
