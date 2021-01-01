@@ -4,11 +4,14 @@ import net.mamoe.mirai.message.MessageEvent
 import net.mamoe.mirai.message.data.content
 import org.firespoon.fsbotclient.cli.BaseCli
 import kotlin.reflect.KClass
+import kotlin.reflect.full.createInstance
 
 abstract class FsCommand<C : BaseCli, E : MessageEvent>(
-    val eventClass : KClass<E>,
+    val eventClass: KClass<E>,
     val keywords: List<String>,
-    val factory: () -> C,
+    //val envTemplate: C,
+    val envClazz: KClass<C>,
+    //val factory: () -> C,
     private val prefixArgs: ArgParser<E> = { emptyList() },
     private val messageArgs: ArgParser<E> = { event ->
         val content = event.message.content
@@ -32,7 +35,7 @@ abstract class FsCommand<C : BaseCli, E : MessageEvent>(
     open suspend fun execute(event: E) {
         this.event = event
         val args = getArgs(event)
-        val env = factory()
+        val env = envClazz.createInstance()
         try {
             env.call(args)
         } catch (e: IllegalArgumentException) {

@@ -1,8 +1,9 @@
 package org.firespoon.fsbotclient.function
 
+import org.firespoon.fsbotclient.cli.EmptyCli
+import org.firespoon.fsbotclient.cli.int
+import org.firespoon.fsbotclient.cli.nullable
 import org.firespoon.fsbotclient.command.SimpleCommand
-import org.firespoon.fsbotclient.function.env.jojo.JojoJojoEnv
-import org.firespoon.fsbotclient.function.env.jojo.JojoRandomStandEnv
 import org.firespoon.fsbotclient.service.JojoService
 import org.firespoon.fsbotclient.service.StandService
 import org.firespoon.fsbotclient.utils.NetworkUtils
@@ -12,9 +13,12 @@ abstract class JojoFunction {
         private val jojoService = NetworkUtils.buildService(JojoService::class)
         private val standService = NetworkUtils.buildService(StandService::class)
 
+        class JojoJojoEnv : EmptyCli() {
+            val time : Int? by int().nullable()
+        }
         val jojoCommand = SimpleCommand(
             keywords = listOf(".jojo"),
-            factory = { JojoJojoEnv() },
+            envClazz = JojoJojoEnv::class,
             getResult = { jojoService.jojo(time) },
             getMessage = { jojoResultList ->
                 val sb = StringBuilder("您的替身面板为：")
@@ -27,9 +31,12 @@ abstract class JojoFunction {
             }
         )
 
+        class JojoRandomStandEnv : EmptyCli() {
+            val time : Int? by int().nullable()
+        }
         val randomStandCommand = SimpleCommand(
             listOf(".rsd", ".random_stand"),
-            factory = { JojoRandomStandEnv() },
+            envClazz = JojoRandomStandEnv::class,
             getResult = { standService.random(time) },
             getMessage = { standList ->
                 val sb = StringBuilder("您的替身为：")

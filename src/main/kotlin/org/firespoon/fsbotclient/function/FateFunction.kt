@@ -1,10 +1,7 @@
 package org.firespoon.fsbotclient.function
 
+import org.firespoon.fsbotclient.cli.*
 import org.firespoon.fsbotclient.command.SimpleCommand
-import org.firespoon.fsbotclient.function.env.fate.FateAddServantEnv
-import org.firespoon.fsbotclient.function.env.fate.FateFateEnv
-import org.firespoon.fsbotclient.function.env.fate.FateRandomHassanEnv
-import org.firespoon.fsbotclient.function.env.fate.FateRandomServantEnv
 import org.firespoon.fsbotclient.service.FateService
 import org.firespoon.fsbotclient.service.ServantService
 import org.firespoon.fsbotclient.utils.NetworkUtils
@@ -14,9 +11,12 @@ abstract class FateFunction {
         private val fateService = NetworkUtils.buildService(FateService::class)
         private val servantService = NetworkUtils.buildService(ServantService::class)
 
+        class FateFateEnv : EmptyCli() {
+            val time: Int? by int().nullable()
+        }
         val fateCommand = SimpleCommand(
             keywords = listOf(".fate"),
-            factory = { FateFateEnv() },
+            envClazz = FateFateEnv::class,
             getResult = { fateService.fate(time) },
             getMessage = { fateResultList ->
                 val sb = StringBuilder("您的fate人物做成结果为：\n")
@@ -26,9 +26,15 @@ abstract class FateFunction {
             }
         )
 
+        class FateRandomServantEnv : EmptyCli() {
+            val userId: Long by long()
+            val clazz: String? by clazz().nullable()
+            val time: Int? by int().nullable()
+            val command: String? by string().nullable()
+        }
         val randomServantCommand = SimpleCommand(
             keywords = listOf(".svt", ".servant"),
-            factory = { FateRandomServantEnv() },
+            envClazz = FateRandomServantEnv::class,
             getResult = { servantService.random(time, clazz, userId, command) },
             getMessage = { servantList ->
                 val sb = java.lang.StringBuilder("您的从者为：")
@@ -46,9 +52,13 @@ abstract class FateFunction {
             }
         )
 
+        class FateAddServantEnv : EmptyCli() {
+            val clazz: String by clazz()
+            val name: String by string()
+        }
         val addServantCommand = SimpleCommand(
             keywords = listOf(".asvt", ".add_servant"),
-            factory = { FateAddServantEnv() },
+            envClazz = FateAddServantEnv::class,
             getResult = { servantService.save(name, clazz) },
             getMessage = { count ->
                 if (count > 0) {
@@ -59,9 +69,13 @@ abstract class FateFunction {
             }
         )
 
+        class FateDeleteServantEnv : EmptyCli() {
+            val clazz: String by clazz()
+            val name: String by string()
+        }
         val deleteServantCommand = SimpleCommand(
             keywords = listOf(".dsvt", ".delete_servant"),
-            factory = { FateAddServantEnv() },
+            envClazz = FateDeleteServantEnv::class,
             getResult = { servantService.delete(name, clazz) },
             getMessage = { count ->
                 if (count > 0) {
@@ -72,9 +86,12 @@ abstract class FateFunction {
             }
         )
 
+        class FateRandomHassanEnv : EmptyCli() {
+            val time : Int? by int().nullable()
+        }
         val randomHassanCommand = SimpleCommand(
             listOf(".has", ".hassan"),
-            factory = { FateRandomHassanEnv() },
+            envClazz = FateRandomHassanEnv::class,
             getResult = { servantService.randomHassan(time) },
             getMessage = { servantList ->
                 val sb = java.lang.StringBuilder("您的从者为：")

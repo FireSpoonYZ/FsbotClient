@@ -7,10 +7,13 @@ import net.mamoe.mirai.message.data.MessageChainBuilder
 import net.mamoe.mirai.message.data.content
 import org.firespoon.fsbotclient.cli.BaseCli
 import org.firespoon.fsbotclient.model.FsResult
+import kotlin.reflect.KClass
 
 class SimpleCommand<C : BaseCli, D>(
     keywords: List<String>,
-    factory: () -> C,
+    //envTemplate: C,
+    envClazz : KClass<C>,
+    //factory: () -> C,
     val getResult: C.() -> FsResult<D>?,
     val getMessage: C.(D) -> String,
     prefixArgs: ArgParser<MessageEvent> = { emptyList() },
@@ -21,7 +24,7 @@ class SimpleCommand<C : BaseCli, D>(
     },
     suffixArgs: ArgParser<MessageEvent> = { emptyList() }
 ) : FsCommand<C, MessageEvent>(
-    MessageEvent::class, keywords, factory, prefixArgs, messageArgs, suffixArgs
+    MessageEvent::class, keywords, envClazz, prefixArgs, messageArgs, suffixArgs
 ) {
     override suspend fun run(env: C) {
         require(event != null) {

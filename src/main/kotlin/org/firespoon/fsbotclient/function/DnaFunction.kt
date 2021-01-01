@@ -11,7 +11,7 @@ abstract class DnaFunction {
 
         val randomDnaCommand = SimpleCommand(
             keywords = listOf(".dna"),
-            factory = { EmptyCli() },
+            envClazz = EmptyCli::class,
             getResult = { dnaService.random() },
             getMessage = { dnaList ->
                 val sb = StringBuilder("您的随机dna结果为：")
