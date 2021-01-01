@@ -14,6 +14,7 @@ suspend fun main() {
         fileBasedDeviceInfo()
     }
 
+    bot.register(CocFunction.cocCommand)
     bot.register(CocFunction.diceCommand)
     bot.register(CocFunction.setCommand)
     bot.register(CocFunction.checkCommand)

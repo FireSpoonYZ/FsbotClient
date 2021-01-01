@@ -15,12 +15,29 @@ abstract class CocFunction {
         private val cocService = NetworkUtils.buildService(CocService::class)
         private val cardService = NetworkUtils.buildService(CardService::class)
 
+        val cocCommand = SimpleCommand(
+            keywords = listOf(".coc"),
+            factory = { CocCocEnv() },
+            getResult = { cocService.coc(time) },
+            getMessage = { data ->
+                val temp = List(data.size) { i ->
+                    var res : String
+                    data[i].apply {
+                        val total = STR!! + CON!! + SIZ!! + DEX!! + APP!! + POW!! + EDU!!
+                        res = "力量:$STR 体质:$CON 体型:$SIZ 敏捷:$DEX 外貌:$APP 智力:$INT 意志:$POW 教育:$EDU 幸运:$LUK 总计:$total/${total+LUK!!}"
+                    }
+                    res
+                }
+                temp.joinToString(prefix = "您的coc人物做成结果为:\n", separator = "\n")
+            }
+        )
+
         val diceCommand = SimpleCommand(
             keywords = listOf(".r", ".rd"),
             factory = { CocDiceEnv() },
             getResult = { diceService.dice(diceExp) },
             getMessage = { data ->
-                "您的骰点结果为：${data.process}"
+                "您的骰点结果为:${data.process}"
             }
         )
 
@@ -32,7 +49,7 @@ abstract class CocFunction {
                 val property = checkResult.property!!
                 val diceResult = checkResult.diceResult!!.res!!
                 val finalResult = checkResult.result
-                "您的 $name 检定结果为： $diceResult/$property $finalResult"
+                "您的 $name 检定结果为: $diceResult/$property $finalResult"
             },
             prefixArgs = { event ->
                 val res = mutableListOf<String>()

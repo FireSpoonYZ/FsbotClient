@@ -5,9 +5,15 @@ import org.firespoon.fsbotclient.model.FsResult
 import org.firespoon.fsbotclient.httprequestclient.annotation.RequestClient
 import org.firespoon.fsbotclient.httprequestclient.annotation.RequestPath
 import org.firespoon.fsbotclient.httprequestclient.annotation.RequestParam
+import org.firespoon.fsbotclient.model.CocResult
 
 @RequestClient("http://localhost/coc")
 interface CocService {
+    @RequestPath("coc")
+    fun coc(
+        @RequestParam("time") time: Int?
+    ) : FsResult<List<CocResult>>
+
     @RequestPath("init")
     fun init(
         @RequestParam("place_id") placeId: Long,
