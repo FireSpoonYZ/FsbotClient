@@ -1,8 +1,7 @@
 package org.firespoon.fsbotclient.cli
 
 abstract class BaseCli {
-    val arguments: MutableList<BaseArgument<*>> =
-        mutableListOf()
+    val arguments: MutableList<BaseArgument<*>> = mutableListOf()
 
     abstract fun run()
 

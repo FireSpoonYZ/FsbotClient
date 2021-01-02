@@ -3,18 +3,20 @@ package org.firespoon.fsbotclient.function.arknights
 import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.*
 import org.firespoon.fsbotclient.command.FsCommand
+import org.firespoon.fsbotclient.command.annotation.Doc
 import org.firespoon.fsbotclient.command.annotation.Keywords
 import org.firespoon.fsbotclient.model.Agent
 import org.firespoon.fsbotclient.model.FsResult
 import org.firespoon.fsbotclient.model.Tag
 
 @Keywords([".ancalc"])
+@Doc("公开招募计算器")
 class ArkNightsCalcCommand : FsCommand<List<Pair<List<Tag>, List<Agent>>>, MessageEvent>() {
-    val tag1: Tag by tag()
-    val tag2: Tag by tag()
-    val tag3: Tag by tag()
-    val tag4: Tag by tag()
-    val tag5: Tag by tag()
+    val tag1: Tag by tag("标签1")
+    val tag2: Tag by tag("标签2")
+    val tag3: Tag by tag("标签3")
+    val tag4: Tag by tag("标签4")
+    val tag5: Tag by tag("标签5")
 
     override fun result(): FsResult<List<Pair<List<Tag>, List<Agent>>>> {
         return ArkNightsFunction.service.calculate(tag1, tag2, tag3, tag4, tag5)

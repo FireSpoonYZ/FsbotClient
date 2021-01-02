@@ -1,13 +1,13 @@
 package org.firespoon.fsbotclient.cli
 
-class LongArgument : BaseArgument<Long>() {
+class LongArgument(name: String) : BaseArgument<Long>(name, "数字") {
     override fun fromString(str: String): Long? {
         return str.toLongOrNull()
     }
 }
 
-fun BaseCli.long(): LongArgument {
-    val arg = LongArgument()
+fun BaseCli.long(name: String = ""): LongArgument {
+    val arg = LongArgument(name)
     arguments.add(arg)
     return arg
 }

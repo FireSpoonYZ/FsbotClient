@@ -4,11 +4,13 @@ import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.int
 import org.firespoon.fsbotclient.cli.nullable
 import org.firespoon.fsbotclient.command.FsCommand
+import org.firespoon.fsbotclient.command.annotation.Doc
 import org.firespoon.fsbotclient.command.annotation.Keywords
 import org.firespoon.fsbotclient.model.CocResult
 import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".coc"])
+@Doc("Coc人物做成")
 class CocCocCommand : FsCommand<List<CocResult>, MessageEvent>() {
     private val time: Int? by int().nullable()
 

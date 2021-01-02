@@ -1,6 +1,6 @@
 package org.firespoon.fsbotclient.cli
 
-class ClazzArgument : BaseArgument<String>() {
+class ClazzArgument(name: String) : BaseArgument<String>(name, "职阶") {
     override fun fromString(str: String): String? {
         return str.toClazzOrNull()
     }
@@ -48,8 +48,8 @@ class ClazzArgument : BaseArgument<String>() {
     }
 }
 
-fun BaseCli.clazz(): ClazzArgument {
-    val arg = ClazzArgument()
+fun BaseCli.clazz(name: String = ""): ClazzArgument {
+    val arg = ClazzArgument(name)
     arguments.add(arg)
     return arg
 }

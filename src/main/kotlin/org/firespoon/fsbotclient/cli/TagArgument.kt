@@ -2,7 +2,7 @@ package org.firespoon.fsbotclient.cli
 
 import org.firespoon.fsbotclient.model.Tag
 
-class TagArgument : BaseArgument<Tag>() {
+class TagArgument(name: String) : BaseArgument<Tag>(name, "Tag") {
     override fun fromString(str: String): Tag? {
         val name = when {
             listOf("资深").contains(str) -> "资深干员"
@@ -31,8 +31,8 @@ class TagArgument : BaseArgument<Tag>() {
     }
 }
 
-fun BaseCli.tag(): TagArgument {
-    val arg = TagArgument()
+fun BaseCli.tag(name: String = ""): TagArgument {
+    val arg = TagArgument(name)
     arguments.add(arg)
     return arg
 }

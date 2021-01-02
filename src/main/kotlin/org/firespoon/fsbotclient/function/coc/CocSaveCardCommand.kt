@@ -4,14 +4,16 @@ import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.long
 import org.firespoon.fsbotclient.cli.string
 import org.firespoon.fsbotclient.command.FsCommand
+import org.firespoon.fsbotclient.command.annotation.Doc
 import org.firespoon.fsbotclient.command.annotation.Keywords
 import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".scd", ".save_card"])
+@Doc("保存角色卡")
 class CocSaveCardCommand : FsCommand<Int, MessageEvent>() {
     val placeId: Long by long()
     val ownerId: Long by long()
-    val name: String by string()
+    val name: String by string("角色卡名")
 
     override fun prefixArgs(event: MessageEvent): List<String> {
         val res = mutableListOf<String>()

@@ -1,5 +1,5 @@
 package org.firespoon.fsbotclient.command.annotation
 
-@Target(AnnotationTarget.CLASS)
+@Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Keywords(val keywords : Array<String>)
+annotation class Argument(val doc: String)

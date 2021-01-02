@@ -4,7 +4,7 @@ import java.lang.IllegalArgumentException
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-abstract class BaseArgument<T> : ReadOnlyProperty<Any?, T> {
+abstract class BaseArgument<T>(val name: String, val type: String) : ReadOnlyProperty<Any?, T> {
     var nullable = false
     var value: T? = null
         get() = if (nullable) {

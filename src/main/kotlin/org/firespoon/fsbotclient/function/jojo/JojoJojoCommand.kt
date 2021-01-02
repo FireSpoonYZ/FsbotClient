@@ -1,17 +1,18 @@
 package org.firespoon.fsbotclient.function.jojo
 
 import net.mamoe.mirai.message.MessageEvent
-import org.firespoon.fsbotclient.cli.EmptyCli
+import org.firespoon.fsbotclient.cli.default
 import org.firespoon.fsbotclient.cli.int
-import org.firespoon.fsbotclient.cli.nullable
 import org.firespoon.fsbotclient.command.FsCommand
+import org.firespoon.fsbotclient.command.annotation.Doc
 import org.firespoon.fsbotclient.command.annotation.Keywords
 import org.firespoon.fsbotclient.model.FsResult
 import org.firespoon.fsbotclient.model.JojoResult
 
 @Keywords([".jojo"])
+@Doc("Jojo人物做成")
 class JojoJojoCommand : FsCommand<List<JojoResult>, MessageEvent>() {
-    val time : Int? by int().nullable()
+    val time : Int by int("次数").default(1)
 
     override fun result(): FsResult<List<JojoResult>> {
         return JojoFunction.jojoService.jojo(time)
