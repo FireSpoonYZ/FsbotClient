@@ -1,7 +1,7 @@
 package org.firespoon.fsbotclient.command
 
-import net.mamoe.mirai.message.MessageEvent
+import net.mamoe.mirai.event.events.MessageEvent
 
-interface ICommand<M : MessageEvent> {
-    fun getMessage(event: M): String
+interface ICommand {
+    fun getMessage(event: MessageEvent): String
 }

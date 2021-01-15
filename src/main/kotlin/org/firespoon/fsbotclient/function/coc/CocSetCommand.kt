@@ -1,6 +1,6 @@
 package org.firespoon.fsbotclient.function.coc
 
-import net.mamoe.mirai.message.MessageEvent
+import net.mamoe.mirai.event.events.MessageEvent
 import org.firespoon.fsbotclient.cli.*
 import org.firespoon.fsbotclient.command.FsCommand
 import org.firespoon.fsbotclient.command.annotation.Doc
@@ -9,7 +9,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".st"])
 @Doc("设置技能值")
-class CocSetCommand : FsCommand<Int, MessageEvent>()  {
+class CocSetCommand : FsCommand<Int>()  {
     val placeId: Long by long()
     val ownerId: Long by long()
     val name: String by string("技能名")

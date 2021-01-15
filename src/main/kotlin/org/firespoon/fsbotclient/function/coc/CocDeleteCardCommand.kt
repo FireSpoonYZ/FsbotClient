@@ -1,6 +1,6 @@
 package org.firespoon.fsbotclient.function.coc
 
-import net.mamoe.mirai.message.MessageEvent
+import net.mamoe.mirai.event.events.MessageEvent
 import org.firespoon.fsbotclient.cli.long
 import org.firespoon.fsbotclient.cli.string
 import org.firespoon.fsbotclient.command.FsCommand
@@ -10,7 +10,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".dcd", ".delete_card"])
 @Doc("删除角色卡")
-class CocDeleteCardCommand : FsCommand<Int, MessageEvent>() {
+class CocDeleteCardCommand : FsCommand<Int>() {
     val ownerId: Long by long()
     val name: String by string("角色卡的名字")
 

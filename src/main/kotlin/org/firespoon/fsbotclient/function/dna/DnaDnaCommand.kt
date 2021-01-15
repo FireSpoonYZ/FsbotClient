@@ -1,6 +1,5 @@
 package org.firespoon.fsbotclient.function.dna
 
-import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.command.FsCommand
 import org.firespoon.fsbotclient.command.annotation.Doc
 import org.firespoon.fsbotclient.command.annotation.Keywords
@@ -9,7 +8,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".dna"])
 @Doc("随机抽取Dna")
-class DnaDnaCommand : FsCommand<List<Dna>, MessageEvent>() {
+class DnaDnaCommand : FsCommand<List<Dna>>() {
     override fun result(): FsResult<List<Dna>> {
         return DnaFunction.dnaService.random()
     }

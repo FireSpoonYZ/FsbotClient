@@ -1,6 +1,6 @@
 package org.firespoon.fsbotclient.function.fate
 
-import net.mamoe.mirai.message.MessageEvent
+import net.mamoe.mirai.event.events.MessageEvent
 import org.firespoon.fsbotclient.cli.*
 import org.firespoon.fsbotclient.command.FsCommand
 import org.firespoon.fsbotclient.command.annotation.Doc
@@ -10,7 +10,7 @@ import org.firespoon.fsbotclient.model.Servant
 
 @Keywords([".svt", ".servant"])
 @Doc("召唤从者")
-class FateRandomServantCommand : FsCommand<List<Servant>, MessageEvent>() {
+class FateRandomServantCommand : FsCommand<List<Servant>>() {
     val userId: Long by long()
     val clazz: String? by clazz("职阶").nullable()
     val time: Int? by int("次数").nullable()

@@ -1,6 +1,5 @@
 package org.firespoon.fsbotclient.function
 
-import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.BaseArgument
 import org.firespoon.fsbotclient.cli.nullable
 import org.firespoon.fsbotclient.cli.string
@@ -15,10 +14,10 @@ import kotlin.reflect.full.findAnnotation
 
 @Keywords([".help"])
 @Doc("Command Helper")
-class HelpCommand : FsCommand<List<CommandClass>, MessageEvent>() {
+class HelpCommand : FsCommand<List<CommandClass>>() {
     companion object {
-        private val commandMap = mutableMapOf<String, CommandClass>()
-        private val commandList = mutableListOf<CommandClass>()
+        val commandMap = mutableMapOf<String, CommandClass>()
+        val commandList = mutableListOf<CommandClass>()
 
         fun registerCommand(command: CommandClass) {
             val keywords = command.findAnnotation<Keywords>()!!.keywords
@@ -69,11 +68,11 @@ class HelpCommand : FsCommand<List<CommandClass>, MessageEvent>() {
                 sb.append(keywords.joinToString(prefix = "关键字:[", separator = ", ", postfix = "]"))
 
                 val obj = command.createInstance()
-                val args = obj.arguments.filter {
+                val args = obj.arguments.filter { it ->
                     it.name != ""
                 }
                 if (args.isNotEmpty()) {
-                    sb.append(args.joinToString(prefix = "\n参数:\n", separator = "\n") {
+                    sb.append(args.joinToString(prefix = "\n参数:\n", separator = "\n") { it ->
                         val tsb = StringBuilder("  -${it.name}[类型:${it.type}]")
                         if (it.nullable) {
                             tsb.append("[可选]")
@@ -98,4 +97,4 @@ class HelpCommand : FsCommand<List<CommandClass>, MessageEvent>() {
     }
 }
 
-typealias CommandClass = KClass<out FsCommand<*, *>>;
+typealias CommandClass = KClass<out FsCommand<*>>

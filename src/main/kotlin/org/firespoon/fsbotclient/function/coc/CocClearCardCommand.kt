@@ -1,6 +1,6 @@
 package org.firespoon.fsbotclient.function.coc
 
-import net.mamoe.mirai.message.MessageEvent
+import net.mamoe.mirai.event.events.MessageEvent
 import org.firespoon.fsbotclient.cli.long
 import org.firespoon.fsbotclient.command.FsCommand
 import org.firespoon.fsbotclient.command.annotation.Doc
@@ -9,7 +9,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".ccd", ".clear_card"])
 @Doc("清空当前角色卡")
-class CocClearCardCommand : FsCommand<Int, MessageEvent>() {
+class CocClearCardCommand : FsCommand<Int>() {
     val placeId: Long by long()
     val ownerId: Long by long()
 

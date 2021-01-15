@@ -1,6 +1,6 @@
 package org.firespoon.fsbotclient.function.coc
 
-import net.mamoe.mirai.message.MessageEvent
+import net.mamoe.mirai.event.events.MessageEvent
 import org.firespoon.fsbotclient.cli.*
 import org.firespoon.fsbotclient.command.FsCommand
 import org.firespoon.fsbotclient.command.annotation.Doc
@@ -10,7 +10,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".ra", ".rc"])
 @Doc("检定")
-class CocCheckCommand : FsCommand<CheckResult, MessageEvent>() {
+class CocCheckCommand : FsCommand<CheckResult>() {
     private val placeId: Long by long()
     private val ownerId: Long by long()
     val name: String by string("进行检定的技能名")

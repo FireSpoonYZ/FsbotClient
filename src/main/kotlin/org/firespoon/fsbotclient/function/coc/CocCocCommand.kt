@@ -1,6 +1,5 @@
 package org.firespoon.fsbotclient.function.coc
 
-import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.int
 import org.firespoon.fsbotclient.cli.nullable
 import org.firespoon.fsbotclient.command.FsCommand
@@ -11,7 +10,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".coc"])
 @Doc("Coc人物做成")
-class CocCocCommand : FsCommand<List<CocResult>, MessageEvent>() {
+class CocCocCommand : FsCommand<List<CocResult>>() {
     private val time: Int? by int().nullable()
 
     override fun result(): FsResult<List<CocResult>> {

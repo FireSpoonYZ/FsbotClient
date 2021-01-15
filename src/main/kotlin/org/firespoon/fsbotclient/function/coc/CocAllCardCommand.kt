@@ -1,6 +1,6 @@
 package org.firespoon.fsbotclient.function.coc
 
-import net.mamoe.mirai.message.MessageEvent
+import net.mamoe.mirai.event.events.MessageEvent
 import org.firespoon.fsbotclient.cli.long
 import org.firespoon.fsbotclient.command.FsCommand
 import org.firespoon.fsbotclient.command.annotation.Doc
@@ -10,7 +10,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".acd", ".all_card"])
 @Doc("显示你持有的所有角色卡")
-class CocAllCardCommand : FsCommand<List<Card>, MessageEvent>() {
+class CocAllCardCommand : FsCommand<List<Card>>() {
     val ownerId: Long by long()
 
     override fun prefixArgs(event: MessageEvent): List<String> {

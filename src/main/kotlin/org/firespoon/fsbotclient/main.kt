@@ -1,10 +1,8 @@
 package org.firespoon.fsbotclient
 
-import net.mamoe.mirai.Bot
+import net.mamoe.mirai.BotFactory.INSTANCE.newBot
 import net.mamoe.mirai.alsoLogin
-import net.mamoe.mirai.join
 import org.firespoon.fsbotclient.command.register
-import org.firespoon.fsbotclient.function.CommandClass
 import org.firespoon.fsbotclient.function.HelpCommand
 import org.firespoon.fsbotclient.function.coc.*
 import org.firespoon.fsbotclient.function.fate.*
@@ -16,7 +14,7 @@ suspend fun main() {
     val qqId = 744821060L
     val password = "1!2@3#skyYZ"
 
-    val bot = Bot(qqId, password) {
+    val bot = newBot(qqId, password) {
         fileBasedDeviceInfo()
     }
 

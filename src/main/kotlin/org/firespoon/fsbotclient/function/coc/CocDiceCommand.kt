@@ -1,6 +1,5 @@
 package org.firespoon.fsbotclient.function.coc
 
-import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.default
 import org.firespoon.fsbotclient.cli.string
 import org.firespoon.fsbotclient.command.FsCommand
@@ -11,7 +10,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".r", ".rd"])
 @Doc("掷骰")
-class CocDiceCommand : FsCommand<DiceResult, MessageEvent>()  {
+class CocDiceCommand : FsCommand<DiceResult>()  {
     val diceExp: String by string("表达式").default("1d100")
 
     override fun result(): FsResult<DiceResult> {

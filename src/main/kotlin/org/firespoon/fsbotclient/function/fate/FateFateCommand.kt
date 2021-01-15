@@ -1,6 +1,5 @@
 package org.firespoon.fsbotclient.function.fate
 
-import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.default
 import org.firespoon.fsbotclient.cli.int
 import org.firespoon.fsbotclient.cli.nullable
@@ -12,7 +11,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".fate"])
 @Doc("Fate人物做成")
-class FateFateCommand : FsCommand<List<FateResult>, MessageEvent>() {
+class FateFateCommand : FsCommand<List<FateResult>>() {
     val time : Int by int("次数").default(1)
 
     override fun result(): FsResult<List<FateResult>> {

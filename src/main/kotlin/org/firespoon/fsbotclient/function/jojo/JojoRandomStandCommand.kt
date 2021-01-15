@@ -1,6 +1,5 @@
 package org.firespoon.fsbotclient.function.jojo
 
-import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.default
 import org.firespoon.fsbotclient.cli.int
 import org.firespoon.fsbotclient.cli.nullable
@@ -12,7 +11,7 @@ import org.firespoon.fsbotclient.model.Stand
 
 @Keywords([".rsd", ".random_stand"])
 @Doc("随机抽取替身")
-class JojoRandomStandCommand : FsCommand<List<Stand>, MessageEvent>() {
+class JojoRandomStandCommand : FsCommand<List<Stand>>() {
     val time : Int by int("次数").default(1)
 
     override fun result(): FsResult<List<Stand>> {

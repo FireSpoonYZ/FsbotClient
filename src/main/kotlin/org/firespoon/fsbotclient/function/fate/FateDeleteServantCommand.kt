@@ -1,6 +1,5 @@
 package org.firespoon.fsbotclient.function.fate
 
-import net.mamoe.mirai.message.MessageEvent
 import org.firespoon.fsbotclient.cli.*
 import org.firespoon.fsbotclient.command.FsCommand
 import org.firespoon.fsbotclient.command.annotation.Doc
@@ -9,7 +8,7 @@ import org.firespoon.fsbotclient.model.FsResult
 
 @Keywords([".dsvt", ".delete_servant"])
 @Doc("删除从者")
-class FateDeleteServantCommand : FsCommand<Int, MessageEvent>() {
+class FateDeleteServantCommand : FsCommand<Int>() {
     val clazz: String by clazz("职阶")
     val name: String by string("名字")
 
