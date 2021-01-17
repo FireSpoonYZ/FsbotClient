@@ -1,4 +1,4 @@
-package org.firespoon.fsbotclient.command
+package org.firespoon.fsbotclient.command.mirai
 
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.event.events.GroupMessageEvent
@@ -6,7 +6,8 @@ import net.mamoe.mirai.event.events.MessageEvent
 import net.mamoe.mirai.message.data.MessageChainBuilder
 import net.mamoe.mirai.message.data.QuoteReply
 import net.mamoe.mirai.message.data.content
-import org.firespoon.fsbotclient.command.annotation.Keywords
+import org.firespoon.fsbotclient.command.mirai.annotation.Keywords
+import org.firespoon.fsbotclient.command.mirai.resources.MessageEventImpl
 import org.firespoon.fsbotclient.function.HelpCommand
 import kotlin.reflect.KClass
 import kotlin.reflect.full.*
@@ -22,7 +23,8 @@ fun <T> Bot.register(clazz: KClass<out FsCommand<T>>) {
         if (keywords.contains(keyword)) {
             try {
                 val inst = clazz.primaryConstructor!!.call()
-                val message = inst.getMessage(event)
+                val mEvent = MessageEventImpl(event)
+                val message = inst.getMessage(mEvent)
 
                 val mb = MessageChainBuilder()
                 if (event is GroupMessageEvent) {
