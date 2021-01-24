@@ -2,9 +2,9 @@ package org.firespoon.fsbotclient.function.coc
 
 import org.firespoon.fsbotclient.cli.int
 import org.firespoon.fsbotclient.cli.nullable
-import org.firespoon.fsbotclient.command.FsCommand
-import org.firespoon.fsbotclient.command.annotation.Doc
-import org.firespoon.fsbotclient.command.annotation.Keywords
+import org.firespoon.fsbotclient.command.mirai.FsCommand
+import org.firespoon.fsbotclient.command.mirai.annotation.Doc
+import org.firespoon.fsbotclient.command.mirai.annotation.Keywords
 import org.firespoon.fsbotclient.model.CocResult
 import org.firespoon.fsbotclient.model.FsResult
 

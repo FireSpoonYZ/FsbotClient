@@ -1,18 +1,17 @@
-package org.firespoon.fsbotclient.command
+package org.firespoon.fsbotclient.command.mirai
 
-import net.mamoe.mirai.event.events.MessageEvent
-import net.mamoe.mirai.message.data.content
 import org.firespoon.fsbotclient.cli.EmptyCli
+import org.firespoon.fsbotclient.command.resources.MessageEvent
 import org.firespoon.fsbotclient.model.FsResult
 
-abstract class FsCommand<T> : ICommand, EmptyCli() {
+abstract class FsCommand<T> : EmptyCli() {
     open fun prefixArgs(event: MessageEvent): List<String> {
         return emptyList()
     }
 
     open fun args(event: MessageEvent): List<String> {
-        val content = event.message.content
-        val allTokens = content.split(Regex("\\s+"))
+        val message = event.message
+        val allTokens = message.split(Regex("\\s+"))
         return allTokens.subList(1, allTokens.size)
     }
 
@@ -20,7 +19,7 @@ abstract class FsCommand<T> : ICommand, EmptyCli() {
         return emptyList()
     }
 
-    fun init(event : MessageEvent) {
+    private fun init(event : MessageEvent) {
         val args = mutableListOf<String>()
         args.addAll(prefixArgs(event))
         args.addAll(args(event))
@@ -33,7 +32,7 @@ abstract class FsCommand<T> : ICommand, EmptyCli() {
 
     abstract fun message(result: T): String
 
-    override fun getMessage(event : MessageEvent): String {
+    fun getMessage(event : MessageEvent): String {
         this.init(event)
         val result = this.result()
         return if (result.code == 200) {

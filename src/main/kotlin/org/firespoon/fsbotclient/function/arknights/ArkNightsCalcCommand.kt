@@ -1,9 +1,9 @@
 package org.firespoon.fsbotclient.function.arknights
 
 import org.firespoon.fsbotclient.cli.*
-import org.firespoon.fsbotclient.command.FsCommand
-import org.firespoon.fsbotclient.command.annotation.Doc
-import org.firespoon.fsbotclient.command.annotation.Keywords
+import org.firespoon.fsbotclient.command.mirai.FsCommand
+import org.firespoon.fsbotclient.command.mirai.annotation.Doc
+import org.firespoon.fsbotclient.command.mirai.annotation.Keywords
 import org.firespoon.fsbotclient.model.Agent
 import org.firespoon.fsbotclient.model.FsResult
 import org.firespoon.fsbotclient.model.Tag

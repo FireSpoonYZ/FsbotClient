@@ -1,4 +1,4 @@
-package org.firespoon.fsbotclient.command.annotation
+package org.firespoon.fsbotclient.command.mirai.annotation
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)

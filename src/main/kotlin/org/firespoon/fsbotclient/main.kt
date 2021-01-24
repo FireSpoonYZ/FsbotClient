@@ -2,7 +2,7 @@ package org.firespoon.fsbotclient
 
 import net.mamoe.mirai.BotFactory.INSTANCE.newBot
 import net.mamoe.mirai.alsoLogin
-import org.firespoon.fsbotclient.command.register
+import org.firespoon.fsbotclient.command.mirai.register
 import org.firespoon.fsbotclient.function.HelpCommand
 import org.firespoon.fsbotclient.function.coc.*
 import org.firespoon.fsbotclient.function.fate.*

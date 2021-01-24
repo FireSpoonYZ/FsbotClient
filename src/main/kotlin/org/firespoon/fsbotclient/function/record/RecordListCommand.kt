@@ -1,16 +1,16 @@
-package org.firespoon.fsbotclient.function.coc
+package org.firespoon.fsbotclient.function.record
 
 import org.firespoon.fsbotclient.cli.long
 import org.firespoon.fsbotclient.command.mirai.FsCommand
 import org.firespoon.fsbotclient.command.mirai.annotation.Doc
 import org.firespoon.fsbotclient.command.mirai.annotation.Keywords
 import org.firespoon.fsbotclient.command.resources.MessageEvent
-import org.firespoon.fsbotclient.model.Card
 import org.firespoon.fsbotclient.model.FsResult
+import org.firespoon.fsbotclient.model.Record
 
-@Keywords([".acd", ".all_card"])
-@Doc("显示你持有的所有角色卡")
-class CocAllCardCommand : FsCommand<List<Card>>() {
+@Keywords([".lrd", "list_record"])
+@Doc("查看所有备忘录")
+class RecordListCommand : FsCommand<List<Record>>() {
     val ownerId: Long by long()
 
     override fun prefixArgs(event: MessageEvent): List<String> {
@@ -19,14 +19,16 @@ class CocAllCardCommand : FsCommand<List<Card>>() {
         return res
     }
 
-    override fun result(): FsResult<List<Card>> {
-        return CocFunction.cardService.getAll(ownerId)
+    override fun result(): FsResult<List<Record>> {
+        return RecordFunction.recordService.list(ownerId)
     }
 
-    override fun message(result: List<Card>): String {
+    override fun message(result: List<Record>): String {
         return result.joinToString(
-            prefix = "您的角色卡为:\n",
+            prefix = "您的备忘录为：\n",
             separator = "\n"
-        ) { it.name!! }
+        ) {
+            "${it.key} ${it.value}"
+        }
     }
 }

@@ -3,6 +3,7 @@ package org.firespoon.fsbotclient.command.mirai
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.event.events.MessageEvent
+import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.MessageChainBuilder
 import net.mamoe.mirai.message.data.QuoteReply
 import net.mamoe.mirai.message.data.content
@@ -30,6 +31,9 @@ fun <T> Bot.register(clazz: KClass<out FsCommand<T>>) {
                 if (event is GroupMessageEvent) {
                     val qr = QuoteReply(event.message)
                     mb.add(qr)
+                    val at = At(event.sender)
+                    mb.add(at)
+                    mb.add(" ")
                 }
                 mb.add(message)
                 event.subject.sendMessage(mb.build())

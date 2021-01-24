@@ -1,18 +1,19 @@
-package org.firespoon.fsbotclient.function.coc
+package org.firespoon.fsbotclient.function.record
 
-import org.firespoon.fsbotclient.command.resources.MessageEvent
 import org.firespoon.fsbotclient.cli.long
 import org.firespoon.fsbotclient.cli.string
 import org.firespoon.fsbotclient.command.mirai.FsCommand
 import org.firespoon.fsbotclient.command.mirai.annotation.Doc
 import org.firespoon.fsbotclient.command.mirai.annotation.Keywords
+import org.firespoon.fsbotclient.command.resources.MessageEvent
 import org.firespoon.fsbotclient.model.FsResult
 
-@Keywords([".dcd", ".delete_card"])
-@Doc("删除角色卡")
-class CocDeleteCardCommand : FsCommand<Int>() {
+@Keywords([".srd", ".set_record"])
+@Doc("保存一条备忘录")
+class RecordSaveCommand : FsCommand<String>() {
     val ownerId: Long by long()
-    val name: String by string("角色卡的名字")
+    val key: String by string("关键字")
+    val value: String by string("文字")
 
     override fun prefixArgs(event: MessageEvent): List<String> {
         val res = mutableListOf<String>()
@@ -20,15 +21,11 @@ class CocDeleteCardCommand : FsCommand<Int>() {
         return res
     }
 
-    override fun result(): FsResult<Int> {
-        return CocFunction.cardService.delete(ownerId, name)
+    override fun result(): FsResult<String> {
+        return RecordFunction.recordService.save(ownerId, key, value)
     }
 
-    override fun message(result: Int): String {
-        return if (result > 0) {
-            "删除成功"
-        } else {
-            "删除失败"
-        }
+    override fun message(result: String): String {
+        return result
     }
 }
