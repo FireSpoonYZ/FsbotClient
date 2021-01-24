@@ -1,11 +1,10 @@
 package org.firespoon.fsbotclient.function
 
-import org.firespoon.fsbotclient.cli.BaseArgument
 import org.firespoon.fsbotclient.cli.nullable
 import org.firespoon.fsbotclient.cli.string
-import org.firespoon.fsbotclient.command.FsCommand
-import org.firespoon.fsbotclient.command.annotation.Doc
-import org.firespoon.fsbotclient.command.annotation.Keywords
+import org.firespoon.fsbotclient.command.mirai.FsCommand
+import org.firespoon.fsbotclient.command.mirai.annotation.Doc
+import org.firespoon.fsbotclient.command.mirai.annotation.Keywords
 import org.firespoon.fsbotclient.model.FsResult
 import kotlin.reflect.KClass
 import kotlin.reflect.full.createInstance
@@ -33,7 +32,7 @@ class HelpCommand : FsCommand<List<CommandClass>>() {
         }
     }
 
-    val keyword: String? by string("").nullable()
+    private val keyword: String? by string("").nullable()
 
     override fun result(): FsResult<List<CommandClass>> {
         val res = FsResult<List<CommandClass>>()
@@ -59,7 +58,6 @@ class HelpCommand : FsCommand<List<CommandClass>>() {
                 val command = result[0]
 
                 val sb = StringBuilder()
-
 
                 val doc = command.findAnnotation<Doc>()!!.doc
                 sb.append("\n功能:$doc\n")
