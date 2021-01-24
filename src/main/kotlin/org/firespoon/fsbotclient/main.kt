@@ -9,6 +9,10 @@ import org.firespoon.fsbotclient.function.fate.*
 import org.firespoon.fsbotclient.function.dna.*
 import org.firespoon.fsbotclient.function.jojo.*
 import org.firespoon.fsbotclient.function.arknights.*
+import org.firespoon.fsbotclient.function.record.RecordDeleteCommand
+import org.firespoon.fsbotclient.function.record.RecordListCommand
+import org.firespoon.fsbotclient.function.record.RecordLoadCommand
+import org.firespoon.fsbotclient.function.record.RecordSaveCommand
 
 suspend fun main() {
     val qqId = 744821060L
@@ -43,6 +47,11 @@ suspend fun main() {
         it.register(JojoRandomStandCommand::class)
 
         it.register(ArkNightsCalcCommand::class)
+
+        it.register(RecordSaveCommand::class)
+        it.register(RecordLoadCommand::class)
+        it.register(RecordListCommand::class)
+        it.register(RecordDeleteCommand::class)
 
         it.alsoLogin()
         it.join()
