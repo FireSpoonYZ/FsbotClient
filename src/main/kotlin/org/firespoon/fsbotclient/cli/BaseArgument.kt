@@ -7,23 +7,18 @@ import kotlin.reflect.KProperty
 abstract class BaseArgument<T>(val name: String, val type: String) : ReadOnlyProperty<Any?, T> {
     var nullable = false
     var value: T? = null
-        get() = if (nullable) {
-            if (field != null) {
+        get() = when {
+            field != null -> {
                 field
-            } else {
+            }
+            default != null -> {
                 default
             }
-        } else {
-            when {
-                field != null -> {
-                    field
-                }
-                default != null -> {
-                    default
-                }
-                else -> {
-                    throw IllegalArgumentException("不能为null")
-                }
+            nullable -> {
+                null
+            }
+            else -> {
+                throw IllegalArgumentException("不能为null")
             }
         }
     var default: T? = null
