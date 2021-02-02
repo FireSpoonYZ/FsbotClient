@@ -21,6 +21,7 @@ abstract class BaseArgument<T>(val name: String, val type: String) : ReadOnlyPro
                 throw IllegalArgumentException("不能为null")
             }
         }
+
     var default: T? = null
 
     override fun getValue(thisRef: Any?, property: KProperty<*>): T {
