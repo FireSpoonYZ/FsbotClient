@@ -24,7 +24,7 @@ class CocCocCommand : FsCommand<List<CocResult>>() {
         ) {
             var res: String
             it.apply {
-                val total = STR!! + CON!! + SIZ!! + DEX!! + APP!! + POW!! + EDU!!
+                val total = STR!! + CON!! + SIZ!! + DEX!! + APP!! + POW!! + EDU!! + INT!!
                 val totalWithLUK = total + LUK!!
                 res =
                     "力量:$STR 体质:$CON 体型:$SIZ 敏捷:$DEX 外貌:$APP 智力:$INT 意志:$POW 教育:$EDU 幸运:$LUK 总计:$total/$totalWithLUK"
